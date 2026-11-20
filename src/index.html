@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="useEffect() explained: setup, cleanup and the dependency array, with a live timeline."
+    />
+    <title>useEffect() — explain-me</title>
+    <script>
+      // Dark by default when the OS says so; an explicit toggle wins afterwards.
+      (function () {
+        var stored = localStorage.getItem('explain-me-theme');
+        var dark = stored
+          ? stored === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/main.tsx"></script>
+  </body>
+</html>

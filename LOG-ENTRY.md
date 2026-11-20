@@ -4,4 +4,4 @@ Copy this row into your central log (set location here: <!-- e.g. `explain-me-lo
 
 | Date | Repo | Topic | Summary |
 | ---- | ---- | ----- | ------- |
-| YYYY-MM-DD | `explain-me-<topic>` | Topic name | 2-3 line human summary of what you learned. |
+| 2026-11-20 | `explain-me-react-use-effect` | React `useEffect()` | `useEffect` is a synchronizer, not mount/update/unmount callbacks: setup runs after paint, cleanup runs before the next setup, and the deps array is an `Object.is` comparison of the effect's inputs. The dev double invoke is StrictMode stress-testing cleanup, not a bug — and cleanup is the cancellation window that stops a slow response from overwriting fresh data. |

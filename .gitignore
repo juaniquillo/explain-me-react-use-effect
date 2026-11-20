@@ -7,3 +7,8 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Node (this lesson: Vite + React in src/)
+node_modules/
+dist/
+*.log

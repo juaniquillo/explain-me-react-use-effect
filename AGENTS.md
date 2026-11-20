@@ -31,3 +31,11 @@ Verify by execution before calling it done: build, serve + curl, typecheck — o
 - Method for this tech: overall / usage examples / code walkthrough / interactive + graphs / gotchas
 - Gitignore: append the lines your stack needs (e.g. Node: `node_modules/ dist/` / Python: `__pycache__/ .venv/`)
 -->
+
+- Run: `cd src && npm run dev` (primary), `npm run typecheck`, `npm run build`, `npx vite preview --port 4173`
+- Deps, each with a job: `react@19` + `react-dom@19` (the subject of the lesson), `vite@8` + `@vitejs/plugin-react@6` (dev server + static build), `typescript@5.9` (strict typecheck gate), `tailwindcss@4` + `@tailwindcss/vite@4` (page styling, `src/README.md` rule), `shiki@4` (syntax highlighting with light + dark themes in one pass, JS regex engine so no `.wasm` fetch)
+- Env: no `.env`, no variables, no secrets. Node ≥ 20 (built on Node 26, npm 11). Nothing is fetched at runtime.
+- Delivery: interactive — effect *timing* is invisible in prose; the panels log setup/cleanup with timestamps, which is the whole lesson.
+- Method for this tech: overall explanation (three phases, synchronizer framing) + code walkthrough (`useRoomConnection`, `lib/events`) + interactive panels (lifecycle, StrictMode, race, loop) + mandatory gotchas. Derived content uses pattern (c): `?raw` imports of the exact modules the panels execute, so listings cannot drift.
+- Gitignore: `node_modules/`, `dist/`, `*.log` (added for this lesson).
+- StrictMode note: this lesson keeps `<StrictMode>` at the root in `src/main.tsx`. Do not move it into a panel — React's double-invoke pass is gated on the root fiber (`commitDoubleInvokeEffectsInDEV`), so a nested StrictMode double-renders but never double-invokes effects, which silently empties the StrictMode panel.

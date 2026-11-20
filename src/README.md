@@ -12,3 +12,28 @@
 - Verify by execution before calling it done — on a clean checkout, not just the dev server. Pick your runtime's line as primary and record it in `## Run`: node (`npm run build` + serve/`preview` + `curl`, `tsc`), python (`python -m http.server` + `curl`, `compileall`), php (`php -l` + `php src/demo.php`), static (`npx serve` + `curl`).
 - Document the run command in the per-lesson `README.md` under `How demo works`, and append a `## Run` section here with the exact commands + env setup.
 - Credit the lineage: every lesson notes where it came from — the lesson repo and the template repo (`https://github.com/juaniquillo/explain-me-template`). A small footer works for webpages; a closing line in CLI output or a Sources link works for anything else. Quiet, same style as the output.
+
+## Run
+
+From `src/`:
+
+```sh
+npm ci            # lockfile is committed; npm install works too
+npm run dev       # primary → http://localhost:5173
+```
+
+Verification — the same three lines used before calling this lesson done:
+
+```sh
+npm run typecheck              # tsc --noEmit, strict
+npm run build                  # → dist/ (static, self-contained)
+npx vite preview --port 4173   # serve dist/, then curl http://localhost:4173/
+```
+
+- Env: none. No `.env`, no variables, no secrets. Node ≥ 20 (built on Node 26, npm 11).
+- Build output: `dist/` — `index.html` plus hashed CSS and JS only. No CDN, no font fetch, no
+  runtime requests; verified by grepping the built assets for external URLs.
+- Derived content: pattern (c), runtime import. The page imports each snippet twice — once to run it,
+  once with `?raw` to highlight it — so every listing is the executing file. No checked-in copies.
+- Dev vs build: the dev server runs with StrictMode's extra setup/cleanup cycle; `dist/` does not.
+  Both behaviours are deliberate and are the subject of section 03.
